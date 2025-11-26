@@ -62,6 +62,11 @@ public class Wso2SoapClient {
             call.setProperty("axis.connection.timeout", properties.getConnectionTimeoutMillis());
             call.setTimeout(properties.getReadTimeoutMillis());
 
+            if (properties.getCredentials() != null) {
+                call.setUsername(properties.getCredentials().getUsername());
+                call.setPassword(properties.getCredentials().getPassword());
+            }
+
             callCustomizer.accept(call);
             return call;
         } catch (ServiceException e) {

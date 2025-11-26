@@ -9,12 +9,14 @@ public final class Wso2SoapClientProperties {
     private final String namespaceUri;
     private final int connectionTimeoutMillis;
     private final int readTimeoutMillis;
+    private final Wso2SoapCredentials credentials;
 
     private Wso2SoapClientProperties(Builder builder) {
         this.wsdlUrl = builder.wsdlUrl;
         this.namespaceUri = builder.namespaceUri;
         this.connectionTimeoutMillis = builder.connectionTimeoutMillis;
         this.readTimeoutMillis = builder.readTimeoutMillis;
+        this.credentials = builder.credentials;
     }
 
     public String getWsdlUrl() {
@@ -33,6 +35,10 @@ public final class Wso2SoapClientProperties {
         return readTimeoutMillis;
     }
 
+    public Wso2SoapCredentials getCredentials() {
+        return credentials;
+    }
+
     public static Builder builder(String wsdlUrl) {
         return new Builder(wsdlUrl);
     }
@@ -42,6 +48,7 @@ public final class Wso2SoapClientProperties {
         private String namespaceUri;
         private int connectionTimeoutMillis = 10_000;
         private int readTimeoutMillis = 60_000;
+        private Wso2SoapCredentials credentials;
 
         private Builder(String wsdlUrl) {
             this.wsdlUrl = wsdlUrl;
@@ -59,6 +66,16 @@ public final class Wso2SoapClientProperties {
 
         public Builder readTimeoutMillis(int readTimeoutMillis) {
             this.readTimeoutMillis = readTimeoutMillis;
+            return this;
+        }
+
+        public Builder basicAuth(String username, String password) {
+            this.credentials = new Wso2SoapCredentials(username, password);
+            return this;
+        }
+
+        public Builder credentials(Wso2SoapCredentials credentials) {
+            this.credentials = credentials;
             return this;
         }
 

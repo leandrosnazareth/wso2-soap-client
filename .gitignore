@@ -1,0 +1,21 @@
+# Maven / Java
+target/
+*.class
+*.log
+
+# Eclipse / IntelliJ / VS Code
+.project
+.classpath
+.settings/
+.idea/
+*.iml
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Maven wrapper
+mvnw
+mvnw.cmd
+.mvn/
